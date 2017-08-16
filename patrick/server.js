@@ -106,10 +106,13 @@ server.get('/posts/:id', (req, res) => {
   });
 });
 
+// Use case: http://localhost:3000/posts/
 server.put('/posts', (req, res) => {
   res.json({ error: 'Please append an ID# to /posts/#.' });
 });
 
+// Use case: http://localhost:3000/posts/<Unique ID #>
+// Postman body ~~> { "title": "modify", "contents": "modify" }
 server.put('/posts/:id', (req, res) => {
   const { id } = req.params;
   const { title, contents } = req.body;
