@@ -81,8 +81,6 @@ server.get('/posts', (req, res) => {
 
 server.post('/posts', (req, res) => {
   const { title, contents } = req.body;
-  // console.log(title);
-  // console.log(contents);
   if (!title || !contents) {
     res.status(STATUS_USER_ERROR);
     res.json({ error: 'please provide title and contents' });
@@ -125,6 +123,7 @@ server.delete('/posts/:id', (req, res) => {
     res.json(post);
   });
 });
+
 mongoose.Promise = global.Promise;
 const connect = mongoose.connect(
   'mongodb://localhost/users',
