@@ -109,6 +109,34 @@ server.get('/posts/:id', (req, res) => {
   });
 });
 
+server.put('/posts', (req, res) => {
+  res.json({ error: 'Please append an ID# to /posts/#.' });
+});
+
+server.put('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, contents } = req.body;
+  const updates = { title, contents };
+  if (!title) {
+    res.status(STATUS_USER_ERROR);
+    res.json({ error: 'Please modify the TITLE.' });
+    return;
+  }
+  if (!contents) {
+    res.status(STATUS_USER_ERROR);
+    res.json({ error: 'Please modify the CONTENTS too.' });
+    return;
+  }
+  Blog.updateOne({ _id: id }, updates, (err) => {
+    if (err) {
+      res.status(STATUS_SERVER_ERROR);
+      res.json(`There is no: ${err.value}`);
+    } else {
+      res.json(updates);
+    }
+  });
+});
+
 server.delete('/posts/:id', (req, res) => {
   const { id } = req.params;
   Blog.remove({_id: id}, (err, post) => {
