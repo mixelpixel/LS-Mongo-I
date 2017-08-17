@@ -111,7 +111,7 @@ server.put('/posts', (req, res) => {
   res.json({ error: 'Please append an ID# to /posts/#.' });
 });
 
-// Use case: http://localhost:3000/posts/<Unique ID #>
+// Use case: http://localhost:3000/posts/Unique_ID_#
 // Postman body ~~> { "title": "modify", "contents": "modify" }
 server.put('/posts/:id', (req, res) => {
   const { id } = req.params;
